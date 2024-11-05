@@ -33,7 +33,8 @@ public class UserService {
     public UserModel createUser(UserInputDto user){
         boolean emailExists = this.userRepository.existsByEmail(user.getEmail());
         boolean phoneExists = this.userRepository.existsByPhone(user.getPhone());
-        if ( emailExists || phoneExists) throw new IllegalArgumentException("User with this email or phone already exists");
+        String errorMessage = "User with this email or phone already exists";
+        if ( emailExists || phoneExists) throw new IllegalArgumentException(errorMessage);
 
         UserModel newUser = new UserModel();
         newUser.setFirstName(user.getFirstName());
