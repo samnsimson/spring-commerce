@@ -1,5 +1,6 @@
 package com.ecommerce.api.user;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    private ResponseEntity<UserModel> createUser(@RequestBody UserInputDto user){
+    private ResponseEntity<UserModel> createUser(@Valid @RequestBody UserInputDto user){
         UserModel createdUser = this.userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
