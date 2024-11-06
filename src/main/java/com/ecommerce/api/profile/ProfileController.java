@@ -1,7 +1,6 @@
 package com.ecommerce.api.profile;
 
-import com.ecommerce.api.constructs.CrudController;
-import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/profile")
-public class ProfileController implements CrudController<ProfileModel, String> {
+public class ProfileController {
     private final ProfileService profileService;
 
     public ProfileController(ProfileService profileService){
@@ -18,7 +17,7 @@ public class ProfileController implements CrudController<ProfileModel, String> {
     }
 
     @PostMapping("")
-    public ResponseEntity<ProfileModel> create(@RequestBody ProfileModel entity) {
+    public ResponseEntity<ProfileModel> create(@Valid  @RequestBody ProfileInputDto entity) {
         ProfileModel profile = this.profileService.create(entity);
         return ResponseEntity.ok(profile);
     }

@@ -1,6 +1,5 @@
 package com.ecommerce.api.profile;
 
-import com.ecommerce.api.constructs.CrudService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -8,15 +7,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProfileService implements CrudService<ProfileModel, String> {
+public class ProfileService {
     private final ProfileRepository profileRepository;
 
     public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }
 
-    public ProfileModel create(ProfileModel entity) {
-        return this.profileRepository.save(entity);
+    public ProfileModel create(ProfileInputDto entity) {
+        ProfileModel profile = new ProfileModel();
+        profile.setAddressOne(entity.getAddressOne());
+        profile.setAddressTwo(entity.getAddressTwo());
+        profile.setCity(entity.getCity());
+        profile.setState(entity.getState());
+        profile.setCountry(entity.getCountry());
+        profile.setZipcode(entity.getZipcode());
+        return this.profileRepository.save(profile);
     }
 
     public List<ProfileModel> getAll() {
