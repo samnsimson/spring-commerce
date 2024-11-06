@@ -1,5 +1,6 @@
 package com.ecommerce.api.user;
 
+import com.ecommerce.api.profile.ProfileModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,7 @@ public class UserModel {
 
     @JsonIgnore
     private String password;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private ProfileModel profile;
 }
