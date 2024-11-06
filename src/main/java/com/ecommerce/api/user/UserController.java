@@ -17,21 +17,31 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("")
+    public ResponseEntity<UserModel> create(@Valid @RequestBody UserInputDto entity) {
+        UserModel createdUser = this.userService.create(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
     @GetMapping("")
-    private ResponseEntity<List<UserModel>> getUsers(){
-        List<UserModel> users = this.userService.getUsers();
+    public ResponseEntity<List<UserModel>> getAll() {
+        List<UserModel> users = this.userService.getAll();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("{id}")
-    private ResponseEntity<UserModel> getUser(@PathVariable String id){
-        Optional<UserModel> user = this.userService.getUserById(id);
+    public ResponseEntity<UserModel> getById(@PathVariable String id) {
+        Optional<UserModel> user = this.userService.getById(id);
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("")
-    private ResponseEntity<UserModel> createUser(@Valid @RequestBody UserInputDto user){
-        UserModel createdUser = this.userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    @PutMapping("{id}")
+    public ResponseEntity<UserModel> update(@PathVariable String id, @RequestBody UserModel entity) {
+        return null;
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        return this.userService.delete(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.ecommerce.api.profile;
 
 import com.ecommerce.api.constructs.CrudService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class ProfileService implements CrudService<ProfileModel, String> {
         return null;
     }
 
-    public void delete(String id) {
+    public ResponseEntity<Void> delete(String id) {
         this.profileRepository.deleteById(id);
+        return null;
     }
 }
