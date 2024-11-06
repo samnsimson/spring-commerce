@@ -48,4 +48,8 @@ public class UserService {
         this.userRepository.deleteById(id);
         return null;
     }
+
+    public Optional<UserModel> getByEmailOrPhone(String email, String phone){
+        return this.userRepository.findByEmailOrPhone(email, phone);
+    }
 }
