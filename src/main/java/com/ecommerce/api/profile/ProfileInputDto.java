@@ -23,5 +23,4 @@ public class ProfileInputDto {
 
     @Size(min = 3, max = 50, message = "zipcode must be between 3 & 50 characters")
     private String zipcode;
-
 }
