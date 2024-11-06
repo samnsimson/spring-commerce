@@ -3,6 +3,7 @@ package com.ecommerce.api.auth;
 import com.ecommerce.api.user.UserInputDto;
 import com.ecommerce.api.user.UserModel;
 import com.ecommerce.api.user.UserService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,10 @@ public class AuthService {
 
     public LoginResponseDto login(LoginInputDto entity) throws Exception {
         Optional<UserModel> user = this.userService.getByEmailOrPhone(entity.getUsername(), entity.getUsername());
-        if(user.isEmpty()) throw new Exception("Email or phone does not exists");
+        if(user.isEmpty()) throw new BadRequestException("Email or phone does not exists");
         UserModel existingUser = user.get();
         boolean passwordMatches = this.passwordEncoder.matches(entity.getPassword(), existingUser.getPassword());
-        if(!passwordMatches) throw new Exception("Wrong password");
+        if(!passwordMatches) throw new BadRequestException("Wrong password");
 
         LoginResponseDto response = new LoginResponseDto();
         response.setMessage("Success");
