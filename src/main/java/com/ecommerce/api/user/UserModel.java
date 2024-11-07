@@ -1,6 +1,6 @@
 package com.ecommerce.api.user;
 
-import com.ecommerce.api.constructs.BaseModel;
+import com.ecommerce.api.utils.BaseModel;
 import com.ecommerce.api.profile.ProfileModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

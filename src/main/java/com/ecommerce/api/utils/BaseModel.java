@@ -1,11 +1,11 @@
-package com.ecommerce.api.constructs;
+package com.ecommerce.api.utils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
@@ -14,11 +14,11 @@ import java.time.OffsetDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseModel {
-    @CreatedDate
+    @CreationTimestamp
     @Column(updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime createdAt = null;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime updatedAt = null;
 }

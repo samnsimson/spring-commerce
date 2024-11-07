@@ -1,6 +1,6 @@
 package com.ecommerce.api.profile;
 
-import com.ecommerce.api.constructs.BaseModel;
+import com.ecommerce.api.utils.BaseModel;
 import com.ecommerce.api.user.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

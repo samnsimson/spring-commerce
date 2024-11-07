@@ -1,6 +1,6 @@
 package com.ecommerce.api.product;
 
-import com.ecommerce.api.constructs.BaseModel;
+import com.ecommerce.api.utils.BaseModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
