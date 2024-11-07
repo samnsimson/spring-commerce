@@ -1,5 +1,6 @@
 package com.ecommerce.api.user;
 
+import com.ecommerce.api.constructs.BaseModel;
 import com.ecommerce.api.profile.ProfileModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class UserModel {
+public class UserModel extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

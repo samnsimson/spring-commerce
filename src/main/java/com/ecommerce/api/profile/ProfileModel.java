@@ -1,5 +1,6 @@
 package com.ecommerce.api.profile;
 
+import com.ecommerce.api.constructs.BaseModel;
 import com.ecommerce.api.user.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "profile")
-public class ProfileModel {
+public class ProfileModel extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
