@@ -3,11 +3,8 @@ package com.ecommerce.api.auth;
 import com.ecommerce.api.user.UserInputDto;
 import com.ecommerce.api.user.UserModel;
 import com.ecommerce.api.user.UserService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {
