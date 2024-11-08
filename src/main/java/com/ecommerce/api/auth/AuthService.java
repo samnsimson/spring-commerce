@@ -12,25 +12,9 @@ import java.util.Optional;
 @Service
 public class AuthService {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
     public AuthService(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.passwordEncoder= passwordEncoder;
-    }
-
-    public LoginResponseDto login(LoginInputDto entity) throws Exception {
-        Optional<UserModel> user = this.userService.getByEmailOrPhone(entity.getUsername(), entity.getUsername());
-        if(user.isEmpty()) throw new BadRequestException("Email or phone does not exists");
-        UserModel existingUser = user.get();
-        boolean passwordMatches = this.passwordEncoder.matches(entity.getPassword(), existingUser.getPassword());
-        if(!passwordMatches) throw new BadRequestException("Wrong password");
-
-        LoginResponseDto response = new LoginResponseDto();
-        response.setMessage("Success");
-        response.setToken("Token");
-        response.setUser("User");
-        return response;
     }
 
     public UserModel signup(SignupInputDto entity){
