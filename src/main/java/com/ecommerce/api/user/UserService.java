@@ -1,6 +1,8 @@
 package com.ecommerce.api.user;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +64,14 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserModel> user = this.userRepository.findByEmail(username);
         if(user.isEmpty()) throw new UsernameNotFoundException("User not found");
+
+        List<GrantedAuthority> authorities = List.of(
+                new SimpleGrantedAuthority("READ"),
+                new SimpleGrantedAuthority("WRITE"),
+                new SimpleGrantedAuthority("USER")
+        );
+
         UserModel currentUser = user.get();
-        return User.withUsername(currentUser.getEmail()).password(currentUser.getPassword()).authorities("read").build();
+        return new CustomUserDetails(currentUser.getId(), currentUser.getEmail(), currentUser.getPassword(), authorities);
     }
 }

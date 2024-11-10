@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.OffsetDateTime;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -35,4 +37,7 @@ public class UserModel extends BaseModel {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private ProfileModel profile;
+
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime lastLogin;
 }
