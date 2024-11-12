@@ -1,8 +1,11 @@
 package com.ecommerce.api.user;
 
+import com.ecommerce.api.utils.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,30 +21,33 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<UserModel> create(@Valid @RequestBody UserInputDto entity) {
+    public ApiResponse<UserModel> create(@Valid @RequestBody UserInputDto entity) {
         UserModel createdUser = this.userService.create(entity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        return new ApiResponse<>(HttpStatus.CREATED, createdUser);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UserModel>> getAll() {
+    public ApiResponse<List<UserModel>> getAll() {
         List<UserModel> users = this.userService.getAll();
-        return ResponseEntity.ok(users);
+        return new ApiResponse<>(HttpStatus.OK, users);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserModel> getById(@PathVariable String id) {
+    public ApiResponse<UserModel> getById(@PathVariable String id) {
         Optional<UserModel> user = this.userService.getById(id);
-        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        if(user.isEmpty()) return new ApiResponse<>(HttpStatus.OK,null);
+        UserModel targetUser = user.get();
+        return new ApiResponse<>(HttpStatus.OK, targetUser);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<UserModel> update(@PathVariable String id, @RequestBody UserModel entity) {
-        return null;
+    public ApiResponse<UserModel> update(@PathVariable String id, @RequestBody UserInputDto entity) {
+        UserModel updatedUser = this.userService.update(id, entity);
+        return new ApiResponse<>(HttpStatus.OK, updatedUser);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        return this.userService.delete(id);
+    public ApiResponse<String> delete(@PathVariable String id) {
+        return new ApiResponse<>(HttpStatus.OK,"Deleted");
     }
 }

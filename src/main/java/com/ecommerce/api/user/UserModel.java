@@ -40,4 +40,6 @@ public class UserModel extends BaseModel {
 
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime lastLogin;
+
+    private String role = "USER";
 }
