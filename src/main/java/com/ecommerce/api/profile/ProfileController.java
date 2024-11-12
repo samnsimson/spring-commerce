@@ -1,7 +1,13 @@
 package com.ecommerce.api.profile;
 
+import com.ecommerce.api.mappers.ProfileMapper;
+import com.ecommerce.api.utils.ApiResponse;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,15 +23,18 @@ public class ProfileController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ProfileModel> create(@Valid  @RequestBody ProfileInputDto entity) {
-        ProfileModel profile = this.profileService.create(entity);
-        return ResponseEntity.ok(profile);
+    public ApiResponse<ProfileModel> create(@Valid  @RequestBody ProfileInputDto entity) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        String userId = jwt.getClaim("id");
+        ProfileModel profile = this.profileService.create(entity, userId);
+        return new ApiResponse<>(HttpStatus.CREATED, profile);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ProfileModel>> getAll() {
+    public ApiResponse<List<ProfileModel>> getAll() {
         List<ProfileModel> profiles = this.profileService.getAll();
-        return ResponseEntity.ok(profiles);
+        return new ApiResponse<>(HttpStatus.OK, profiles);
     }
 
     @GetMapping("{id}")

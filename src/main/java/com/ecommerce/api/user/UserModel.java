@@ -2,7 +2,9 @@ package com.ecommerce.api.user;
 
 import com.ecommerce.api.utils.BaseModel;
 import com.ecommerce.api.profile.ProfileModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +38,7 @@ public class UserModel extends BaseModel {
     private String password;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private ProfileModel profile;
 
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")

@@ -54,7 +54,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/**").hasAuthority("SCOPE_WRITE")
                         .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("SCOPE_WRITE")
                         .requestMatchers("/**").hasAuthority("SCOPE_ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())

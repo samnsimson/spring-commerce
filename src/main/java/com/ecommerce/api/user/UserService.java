@@ -69,7 +69,8 @@ public class UserService implements UserDetailsService {
         UserModel currentUser = user.get();
         List<GrantedAuthority> authorities = List.of(
                 new SimpleGrantedAuthority("USER"),
-                new SimpleGrantedAuthority("READ")
+                new SimpleGrantedAuthority("READ"),
+                new SimpleGrantedAuthority("WRITE")
         );
 
         return new CustomUserDetails(currentUser.getId(), currentUser.getEmail(), currentUser.getPassword(), authorities);

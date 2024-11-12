@@ -2,6 +2,7 @@ package com.ecommerce.api.profile;
 
 import com.ecommerce.api.utils.BaseModel;
 import com.ecommerce.api.user.UserModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,5 +38,6 @@ public class ProfileModel extends BaseModel {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private UserModel user;
 }
