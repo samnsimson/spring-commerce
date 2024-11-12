@@ -1,6 +1,7 @@
 package com.ecommerce.api.user;
 
 import com.ecommerce.api.mappers.UserMapper;
+import com.ecommerce.api.user.dto.UserInputDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

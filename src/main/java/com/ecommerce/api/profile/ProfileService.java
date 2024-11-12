@@ -1,6 +1,7 @@
 package com.ecommerce.api.profile;
 
 import com.ecommerce.api.mappers.ProfileMapper;
+import com.ecommerce.api.profile.dto.ProfileInputDto;
 import com.ecommerce.api.user.UserModel;
 import com.ecommerce.api.user.UserRepository;
 import com.ecommerce.api.utils.exceptions.ResourceNotFoundException;

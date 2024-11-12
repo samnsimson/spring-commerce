@@ -1,6 +1,5 @@
-package com.ecommerce.api.profile;
+package com.ecommerce.api.profile.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 

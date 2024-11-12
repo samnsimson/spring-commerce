@@ -1,7 +1,7 @@
 package com.ecommerce.api.auth;
 
 import com.ecommerce.api.jwt.JwtService;
-import com.ecommerce.api.user.UserInputDto;
+import com.ecommerce.api.user.dto.UserInputDto;
 import com.ecommerce.api.user.UserModel;
 import com.ecommerce.api.user.UserService;
 import org.springframework.security.authentication.AuthenticationManager;

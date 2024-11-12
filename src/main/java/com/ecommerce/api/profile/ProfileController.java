@@ -1,6 +1,6 @@
 package com.ecommerce.api.profile;
 
-import com.ecommerce.api.mappers.ProfileMapper;
+import com.ecommerce.api.profile.dto.ProfileInputDto;
 import com.ecommerce.api.utils.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/profile")

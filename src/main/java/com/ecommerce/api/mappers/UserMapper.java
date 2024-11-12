@@ -1,6 +1,6 @@
 package com.ecommerce.api.mappers;
 
-import com.ecommerce.api.user.UserInputDto;
+import com.ecommerce.api.user.dto.UserInputDto;
 import com.ecommerce.api.user.UserModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
