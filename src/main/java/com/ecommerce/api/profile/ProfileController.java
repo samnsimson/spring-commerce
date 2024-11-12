@@ -38,14 +38,15 @@ public class ProfileController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProfileModel> getById(@PathVariable String id) {
-        Optional<ProfileModel> profile = this.profileService.getById(id);
-        return profile.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ApiResponse<ProfileModel> getById(@PathVariable String id) {
+        ProfileModel profile = this.profileService.getById(id);
+        return new ApiResponse<>(HttpStatus.OK, profile);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ProfileModel> update(@PathVariable String id, @RequestBody ProfileModel entity) {
-        return null;
+    public ApiResponse<ProfileModel> update(@PathVariable String id, @RequestBody ProfileInputDto entity) {
+        ProfileModel profile = this.profileService.update(id, entity);
+        return new ApiResponse<>(HttpStatus.OK, profile);
     }
 
     @DeleteMapping("{id}")

@@ -3,6 +3,7 @@ package com.ecommerce.api.profile;
 import com.ecommerce.api.mappers.ProfileMapper;
 import com.ecommerce.api.user.UserModel;
 import com.ecommerce.api.user.UserRepository;
+import com.ecommerce.api.utils.exceptions.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,18 @@ public class ProfileService {
         return this.profileRepository.findAll();
     }
 
-    public Optional<ProfileModel> getById(String id) {
-        return this.profileRepository.findById(id);
+    public ProfileModel getById(String id) {
+        Optional<ProfileModel> profile = this.profileRepository.findById(id);
+        if(profile.isEmpty()) throw new ResourceNotFoundException("Profile not found");
+        return profile.get();
     }
 
-    public ProfileModel update(String s, ProfileModel entity) {
-        return null;
+    public ProfileModel update(String id, ProfileInputDto entity) {
+        boolean profileExists = this.profileRepository.existsById(id);
+        if(!profileExists) throw new UsernameNotFoundException("Profile not found");
+        ProfileModel profile = this.profileMapper.mapFrom(entity);
+        profile.setId(id);
+        return this.profileRepository.save(profile);
     }
 
     public ResponseEntity<Void> delete(String id) {
